@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { Logo } from "./Logo";
 import { Cart } from "./Cart";
-import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {
-    openDrawer: (newOpen: boolean) => () => void;
+    openDrawer: () => void;
 }
 
 export function Header({ openDrawer }: HeaderProps) {

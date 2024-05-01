@@ -1,35 +1,17 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Card } from "./Card";
+import { Product } from "@/types/Product";
 
-interface Product {
-    id: number,
-    name: string,
-    brand: string,
-    description: string,
-    photo: string,
-    price: string,
+interface MainProps {
+    products: Product[] | null;
 }
 
-export function Main() {
-    const [products, setProducts] = useState<Product[] | null>(null);
-
-    useEffect(() => {
-        (async () => {
-            await axios.get('https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=10&sortBy=id&orderBy=DESC').then((product) => {
-                setProducts(product.data.products);
-            }).catch((error) => {
-                console.log(error.message);
-            })
-        })();
-    }, []);
-
+export function Main({ products }: MainProps) {
     return (
         <ContainerMain>
             <Constainer>
                 {products && products.map((product: Product) => (
-                    <Card 
+                    <Card
                         image={product.photo}
                         name={product.name}
                         descriptiom={product.description}
@@ -39,8 +21,6 @@ export function Main() {
             </Constainer>
         </ContainerMain>
     );
-
-
 }
 
 const ContainerMain = styled.main`

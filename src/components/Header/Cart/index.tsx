@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Dispatch, SetStateAction } from "react";
 
 interface CartProps {
-    openDrawer: (newOpen: boolean) => () => void;
+    openDrawer: () => void;
 }
 
-
-export function Cart({ openDrawer }: CartProps) { 
+export function Cart({ openDrawer }: CartProps) {
 
     return (
         <ContainerCartGlobal>
-            <ContainerCart onClick={openDrawer(true)}>
+            <ContainerCart onClick={openDrawer}>
                 <ShoppingCartIcon />
                 <span>0</span>
             </ContainerCart>
