@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 interface CardProps extends Product {
     setProductsCart: React.Dispatch<React.SetStateAction<Product[] | null>>;
     productsCart: Product[] | null;
+    total: number;
+    setTotal: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function Card({photo, name, price, description, setProductsCart, productsCart, id, brand}: CardProps) {
+export function Card({photo, name, price, description, setProductsCart, productsCart, id, brand, setTotal}: CardProps) {
     function addProductCart() {
         const newProduct: Product = {
             photo,
@@ -23,7 +25,7 @@ export function Card({photo, name, price, description, setProductsCart, products
         
         if (productsCart) {
             const productExistsInCart: boolean = productsCart.find((product) => product.id === newProduct.id) ? true : false;
-
+            
             if (productExistsInCart) {
                 toast.error('Já existe este item no carrinho!');
             } else {
@@ -32,7 +34,8 @@ export function Card({photo, name, price, description, setProductsCart, products
         } else {
             setProductsCart([newProduct]);
         }
-
+        
+        setTotal((state) => state+Number(price));
     }
     
     return (
@@ -107,7 +110,8 @@ const PriceContainer = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    padding: 4px 8px;
+    padding: 0 8px;
+    height: 30px;
 
     span {
         font-size: 15px;

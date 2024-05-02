@@ -3,17 +3,33 @@ import Image from "next/image";
 import { useState } from "react";
 import { Product } from "@/types/Product";
 
-interface ProductCartProps extends Product { }
+interface ProductCartProps extends Product {
+  setProductsCart: React.Dispatch<React.SetStateAction<Product[] | null>>;
+  productsCart: Product[] | null;
+  setTotal: React.Dispatch<React.SetStateAction<number>>;
+  total: number;
+}
 
-export function ProductCart({ name, photo, price }: ProductCartProps) {
+export function ProductCart({ id, name, photo, price, setProductsCart, productsCart, setTotal }: ProductCartProps) {
   const [count, setCount] = useState<number>(1);
 
   function addNumber() {
     setCount(count + 1);
+    setTotal((state) => state+(Number(price)));
   }
 
   function rmvNumber() {
-    setCount(count === 0 ? count : count - 1);
+    if (count === 1) {
+      setCount(count);
+      if (productsCart) {
+        setProductsCart(productsCart.filter((product: Product) => product.id !== id));
+        console.log(productsCart);
+      }
+    } else {
+      setCount(count - 1);
+    }
+
+    setTotal((state) => state-Number(price));
   }
 
   if (!(count === 0)) {

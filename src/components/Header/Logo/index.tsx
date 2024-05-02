@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export function Logo() {
     return (
-        <ContainerLogo>
+        <motion.div
+            style={{
+                marginLeft:50,
+                cursor: 'default'
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+        >
             <TextPrimary>MKS</TextPrimary><TextSecundary>Sistemas</TextSecundary>
-        </ContainerLogo>
+        </motion.div>
     );
 }
-
-const ContainerLogo = styled.div`
-    margin-left:50px;
-    cursor: default;
-`;
 
 const TextPrimary = styled.span`
     font-size: 40px;

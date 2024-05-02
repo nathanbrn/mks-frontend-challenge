@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Product } from "@/types/Product";
+import { motion } from "framer-motion";
 
 interface CartProps {
     openDrawer: () => void;
@@ -13,7 +14,7 @@ export function Cart({ openDrawer, ProductsInCart }: CartProps) {
         <ContainerCartGlobal>
             <ContainerCart onClick={openDrawer}>
                 <ShoppingCartIcon />
-                <span>{ProductsInCart ? ProductsInCart.length : 0}</span>
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>{ProductsInCart ? ProductsInCart.length : 0}</motion.span>
             </ContainerCart>
         </ContainerCartGlobal>
     );
