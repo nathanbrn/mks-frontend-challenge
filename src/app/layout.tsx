@@ -15,6 +15,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <title>MKS Sistemas</title>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
