@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Product } from "@/types/Product";
 
 interface CartProps {
     openDrawer: () => void;
+    ProductsInCart: Product[] | null;
 }
 
-export function Cart({ openDrawer }: CartProps) {
+export function Cart({ openDrawer, ProductsInCart }: CartProps) {
 
     return (
         <ContainerCartGlobal>
             <ContainerCart onClick={openDrawer}>
                 <ShoppingCartIcon />
-                <span>0</span>
+                <span>{ProductsInCart ? ProductsInCart.length : 0}</span>
             </ContainerCart>
         </ContainerCartGlobal>
     );

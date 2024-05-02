@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { Logo } from "./Logo";
 import { Cart } from "./Cart";
+import { Product } from "@/types/Product";
 
 interface HeaderProps {
     openDrawer: () => void;
+    ProductsInCart: Product[] | null;
 }
 
-export function Header({ openDrawer }: HeaderProps) {
+export function Header({ openDrawer, ProductsInCart }: HeaderProps) {
     return (
         <HeaderContainer>
             <Logo />
-            <Cart openDrawer={openDrawer} />
+            <Cart ProductsInCart={ProductsInCart} openDrawer={openDrawer} />
         </HeaderContainer>
     );
 }
