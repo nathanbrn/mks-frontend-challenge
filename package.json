@@ -25,6 +25,7 @@
     "styled-components": "^6.1.9"
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-methods": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@eslint/js": "^9.1.1",
     "@tanstack/eslint-plugin-query": "^5.32.1",
