@@ -7,6 +7,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <title>MKS Sistemas</title>
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -4,16 +4,15 @@ import { DrawerComponent } from "@/components/Drawer/indext";
 import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
 import { Product } from "@/types/Product";
-import { Drawer } from "@mui/material";
 import axios from "axios";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export default function Home() {
   const [open, setOpen] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(1);
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [productsCart, setProductsCart] = useState<Product[] | null>(null);
 
   function openDrawer() {
     setOpen(true);
@@ -21,14 +20,6 @@ export default function Home() {
 
   function closeDrawer() {
     setOpen(false);
-  }
-
-  function addNumber() {
-    setCount(count + 1);
-  }
-
-  function rmvNumber() {
-    setCount(count === 0 ? count : count - 1);
   }
 
   useEffect(() => {
@@ -43,9 +34,10 @@ export default function Home() {
 
   return (
     <>
-      <Header openDrawer={openDrawer} />
-      <Main products={products} />
-      <DrawerComponent open={open} closeDrawer={closeDrawer} count={count} addNumber={addNumber} rmvNumber={rmvNumber} />
+      <Header ProductsInCart={productsCart} openDrawer={openDrawer} />
+      <Main products={products}  setProductsCart={setProductsCart} productsCart={productsCart}/>
+      <DrawerComponent open={open} closeDrawer={closeDrawer} productsCart={productsCart} />
+      <ToastContainer />
     </>
   );
 }
