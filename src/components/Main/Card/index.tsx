@@ -1,30 +1,55 @@
 import styled from "styled-components";
 import Image from 'next/image';
 import Bag from '@/assets/Bag.svg'
+import { Product } from "@/types/Product";
+import { toast } from "react-toastify";
 
-interface CardProps {
-    image: string;
-    name: string
-    price: string;
-    descriptiom: string;
+interface CardProps extends Product {
+    setProductsCart: React.Dispatch<React.SetStateAction<Product[] | null>>;
+    productsCart: Product[] | null;
 }
 
-export function Card({image, name, price, descriptiom}: CardProps) {
+export function Card({photo, name, price, description, setProductsCart, productsCart, id, brand}: CardProps) {
+    function addProductCart() {
+        const newProduct: Product = {
+            photo,
+            name,
+            price, 
+            description,
+            id,
+            brand
+        };
+
+        
+        if (productsCart) {
+            const productExistsInCart: boolean = productsCart.find((product) => product.id === newProduct.id) ? true : false;
+
+            if (productExistsInCart) {
+                toast.error('Já existe este item no carrinho!');
+            } else {
+                setProductsCart([...productsCart, newProduct]);
+            }
+        } else {
+            setProductsCart([newProduct]);
+        }
+
+    }
+    
     return (
         <CardContainer>
             <CardHeader>
-                <Image src={image} width={110} height={130} alt={name} />
+                <Image src={photo} width={110} height={130} alt={name} />
             </CardHeader>
             <CardBody>
                 <ContainerBodyNamePrice>
-                    <NameProduct>Apple Watch Series 4 GPS</NameProduct>
+                    <NameProduct>{name}</NameProduct>
                     <PriceContainer>
                         <span>R${Number(price).toLocaleString('BR')}</span>
                     </PriceContainer>
                 </ContainerBodyNamePrice>
-                <Description>{descriptiom}</Description>
+                <Description>{description}</Description>
             </CardBody>
-            <Button>
+            <Button onClick={addProductCart}>
                 <Image src={Bag} alt="Bag" />
                 <span>COMPRAR</span>
             </Button>
@@ -64,6 +89,7 @@ const Description = styled.span`
 
 const ContainerBodyNamePrice = styled.div`
     display: flex;
+    justify-content: space-between;
     gap: 8px;
     margin: 8px 0;
 `;

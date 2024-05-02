@@ -4,19 +4,26 @@ import { Product } from "@/types/Product";
 
 interface MainProps {
     products: Product[] | null;
+    setProductsCart: React.Dispatch<React.SetStateAction<Product[] | null>>;
+    productsCart: Product[] | null;
 }
 
-export function Main({ products }: MainProps) {
+export function Main({ products, setProductsCart, productsCart }: MainProps) {
     return (
         <ContainerMain>
             <Constainer>
                 {products && products.map((product: Product) => (
                     <Card
-                        image={product.photo}
+                        photo={product.photo}
                         name={product.name}
-                        descriptiom={product.description}
+                        description={product.description}
                         price={product.price}
-                        key={product.id} />
+                        key={product.id}
+                        setProductsCart={setProductsCart}
+                        productsCart={productsCart}
+                        brand={product.brand}
+                        id={product.id}
+                    />
                 ))}
             </Constainer>
         </ContainerMain>
