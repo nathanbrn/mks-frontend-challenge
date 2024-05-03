@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Card } from "./Card";
 import { Product } from "@/types/Product";
-import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 
 interface MainProps {
@@ -10,21 +9,14 @@ interface MainProps {
     productsCart: Product[] | null;
     total: number;
     setTotal: React.Dispatch<React.SetStateAction<number>>;
+    isLoading: boolean;
 }
 
-export function Main({ products, setProductsCart, productsCart, total, setTotal }: MainProps) {
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        if (products) {
-            setLoading(false);
-        }
-    }, [products]);
-
+export function Main({ products, setProductsCart, productsCart, total, setTotal, isLoading }: MainProps) {
     return (
         <ContainerMain>
             <Constainer>
-                {loading && (
+                {isLoading && (
                     <div style={{
                         display: 'flex',
                         gap: 8,
@@ -41,7 +33,7 @@ export function Main({ products, setProductsCart, productsCart, total, setTotal 
                         <Skeleton variant="rectangular" animation='wave' width={250} height={300} />
                     </div>
                 )}
-                {!loading && products?.map((product: Product) => (
+                {!isLoading && products?.map((product: Product) => (
                     <Card
                         photo={product.photo}
                         name={product.name}
