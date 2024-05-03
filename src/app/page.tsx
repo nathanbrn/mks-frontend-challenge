@@ -42,7 +42,6 @@ export default function Home() {
     setOpen(false);
   }
 
-  console.log(products);
   return (
     <>
       <Header ProductsInCart={productsCart} openDrawer={openDrawer} />
